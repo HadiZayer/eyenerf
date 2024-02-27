@@ -1,0 +1,2 @@
+*.ipynb linguist-documentation
+*.ipynb filter=strip-notebook-output
