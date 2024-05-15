@@ -1,0 +1,14 @@
+[project]
+name = "eyenerf"
+version = "0.1.1"
+
+dependencies=[
+    "tqdm",
+    "nerfstudio>=0.3.1"
+]
+
+[tool.setuptools.packages.find]
+include = ["eyenerf*"]
+
+[project.entry-points.'nerfstudio.method_configs']
+eyenerf = 'eyenerf.eyenerf_config:eyenerf_method'
