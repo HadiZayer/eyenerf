@@ -31,6 +31,7 @@ import numpy as np
 
 # from nerfstudio.cameras.lie_groups import exp_map_SE3, exp_map_SO3xR3
 from eyenerf.eyenerf_lie_groups import exp_map_SE3, exp_map_SO3xR3, so3_log_map
+from nerfstudio.cameras.camera_optimizers import CameraOptimizer as CameraOptimizer_
 from nerfstudio.configs.base_config import InstantiateConfig
 from nerfstudio.engine.optimizers import AdamOptimizerConfig
 from nerfstudio.engine.schedulers import (
@@ -66,7 +67,7 @@ class CameraOptimizerConfig(InstantiateConfig):
     groups."""
 
 
-class CameraOptimizer(nn.Module):
+class CameraOptimizer(CameraOptimizer_):
     """Layer that modifies camera poses to be optimized as well as the field during training."""
 
     config: CameraOptimizerConfig
@@ -78,7 +79,11 @@ class CameraOptimizer(nn.Module):
         device: Union[torch.device, str],
         **kwargs,  # pylint: disable=unused-argument
     ) -> None:
-        super().__init__()
+        # we trick the nerfstudio camera optimizer
+        actual_mode = config.mode 
+        config.mode = "off"
+        super().__init__(config, num_cameras, device)
+        config.mode = actual_mode
         # print(kwargs)
         self.config = config
         self.num_cameras = num_cameras
@@ -159,8 +164,8 @@ class CameraOptimizer(nn.Module):
             outputs.append(exp_map_SO3xR3(self.pose_adjustment[indices, :]))
         elif self.config.mode == "SE3":
             outputs.append(exp_map_SE3(self.pose_adjustment[indices, :]))
-        else:
-            assert_never(self.config.mode)
+        # else:
+        #     assert_never(self.config.mode)
 
         if self.config.mode in ["SO3xR3", "SE3"]:
             # Apply initial pose noise.
@@ -173,4 +178,6 @@ class CameraOptimizer(nn.Module):
                 return torch.eye(4, device=self.device)[None, :3, :4].tile(indices.shape[0], 1, 1)
             return functools.reduce(pose_utils.multiply, outputs)
         elif self.config.mode == "depth":
-            return self.pose_adjustment
+            # return self.pose_adjustment
+            return torch.eye(4, device=self.device)[None, :3, :4].tile(indices.shape[0], 1, 1)
+            

@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 
 *.code-workspace
+
+ns_bionerf/
+SIGNeRF/
