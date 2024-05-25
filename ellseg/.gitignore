@@ -1,0 +1,15 @@
+*ffs_gui
+*.pyc
+*.npy
+*.log
+*.lock
+*.pkl
+*.pt
+*.jpg
+*.png
+*.wav
+*.mp3
+*__pycache__/*
+*.vscode
+/TB.lock/
+/rc_log/
