@@ -3,6 +3,7 @@ name = "eyenerf"
 version = "1.0"
 
 dependencies=[
+    "kornia",
     "nerfstudio"
 ]
 
