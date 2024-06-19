@@ -1,10 +1,10 @@
 # The Radiance Field in an Eye
-Our codebase borrows heavily from Nerfstudio 0.2.2, which can be found here: https://github.com/nerfstudio-project/nerfstudio/releases/tag/v0.2.2. It is not necessary to install Nerfstudio directly from the repository, though, and we have installation instructions below. 
+Our codebase is built on top of Nerfstudio 1.0.2. Our installation process will install Nerfstudio automatically and install our method as an extension of Nerfstudio 
 
 ## Environment Installation
 - Ensure that CUDA is available. This code has been verified to work with CUDA 11.8. 
 - Run `conda env create -f environment.yml -v` in your terminal to generate the initial environment. 
-- Activate the environment i.e. run `conda activate rf-from-eyes`.
+- Activate the environment i.e. run `conda activate eyenerf`.
 - Install tinycudann by running 
 ```
 pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn.git@a77dc53ed770dd8ea6f78951d5febe175d0045e9#subdirectory=bindings/torch
@@ -21,7 +21,7 @@ To run our method on our dataset, download one of our captures (found here -- [g
 ```
 ns-train cornea --data $PATH_TO_DATA --output_dir $PATH_TO_OUTPUT --experiment_name $EXPERIMENT_NAME --pipeline.model.rot-loss-mult 0.1 --pipeline.model.use-texture-field True
 ```
-The output will be saved in the directory at `$EXPERIMENT_NAME`. The results can be visualized here when running here: https://viewer.nerf.studio/versions/23-05-01-0/?websocket_url=ws://localhost:7007.
+The output will be saved in the directory at `$EXPERIMENT_NAME`. The results can be visualized here when running here: http://localhost:7007.
 If you are running the code on a cluster, then you will need to forward the port (see https://docs.nerf.studio/quickstart/viewer_quickstart.html). 
 
 ## Data capture instructions
