@@ -16,7 +16,7 @@ pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn.git@a77dc53ed770dd8
 - Then run `pip install -e .` from within this repo's folder. 
 
 ## Run the method
-To run our method on our dataset, download one of our captures (found here -- [google drive](https://drive.google.com/file/d/1w6e2-GTbWgNjiq0V971dCAgrRAJ9scqM/view?usp=sharing)), and run the following command, replacing the variables where appropriate: 
+To run our method on our dataset, download one of our captures (found here -- [google drive](https://drive.google.com/file/d/1YMHZUSifun5gA2sKHj8Jiu32dnqFDccr/view?usp=sharing)), and run the following command, replacing the variables where appropriate: 
 
 ```
 ns-train cornea --data $PATH_TO_DATA --output_dir $PATH_TO_OUTPUT --experiment_name $EXPERIMENT_NAME --pipeline.model.rot-loss-mult 0.1 --pipeline.model.use-texture-field True
