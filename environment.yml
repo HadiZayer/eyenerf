@@ -74,7 +74,6 @@ dependencies:
       - everett==3.1.0
       - exceptiongroup==1.2.0
       - executing==2.0.1
-      - eyenerf==1.0
       - fastjsonschema==2.19.1
       - filelock==3.13.1
       - fire==0.5.0
